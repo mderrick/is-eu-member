@@ -1,8 +1,12 @@
-exports.getEuMembers = function()
+exports.getEuMembers = function(useExceptions)
 {
-	return ["BE", "BG", "CZ", "DK", "DE", "EE", "IE", "EL", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU", "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE", "GB"];
+	// https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+	var europeanCommissionExceptions = ["UK", "EL"];
+	var nonEuropeanCommissionExceptions = ["GB", "GR"];
+	return ["BE", "BG", "CZ", "DK", "DE", "EE", "IE", "ES", "FR", "HR", "IT", "CY", "LV", "LT", "LU", "HU", "MT", "NL", "AT", "PL", "PT", "RO", "SI", "SK", "FI", "SE"]
+		.concat(useExceptions ? europeanCommissionExceptions : nonEuropeanCommissionExceptions);
 };
-exports.isEuMember = function(code)
+exports.isEuMember = function(code, useExceptions)
 {
-	return exports.getEuMembers().indexOf(code.toUpperCase()) != -1;
+	return exports.getEuMembers(useExceptions).indexOf(code.toUpperCase()) != -1;
 };
